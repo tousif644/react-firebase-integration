@@ -1,9 +1,17 @@
+// Importing important files and components into this
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
-import useFirebase from "./../../Hooks/useFirebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getAuth } from "firebase/auth";
+import app from "./../../firebase.init";
+import { signOut } from "firebase/auth";
+
+// Header
 const Header = () => {
-  const { user, handlesignOut } = useFirebase();
+  const auth = getAuth(app);
+  const [user] = useAuthState(auth);
+
   return (
     <div className="header-container">
       <Link to="/">Home</Link>
@@ -12,7 +20,7 @@ const Header = () => {
       <Link to="/register">Register</Link>
       <span>{user?.displayName && user.displayName}</span>
       {user?.uid ? (
-        <button onClick={handlesignOut}>Sign out</button>
+        <button onClick={() => signOut(auth)}>Sign out</button>
       ) : (
         <Link to="/login">Login</Link>
       )}

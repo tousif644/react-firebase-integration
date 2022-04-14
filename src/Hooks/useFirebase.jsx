@@ -8,6 +8,7 @@ import {
   signOut,
 } from "firebase/auth";
 
+
 // Pre defining for the google sign in
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
@@ -38,7 +39,7 @@ const useFirebase = () => {
   }, []);
 
   // return [user, setUser];
-  return { user, signInWithGoogle, handlesignOut };
+  return { user, signInWithGoogle, handlesignOut, };
 };
 
 export default useFirebase;
